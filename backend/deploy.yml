@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+    spec:
+      containers:
+      - name: echo-server
+        image: katsew/kodama:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "10m"
+        env:
+          - name: LAUNCH_HOST
+            value: "0.0.0.0"
+          - name: LAUNCH_PORT
+            value: "9090"
+        command: ["kodama", "http", "server"]
+        ports:
+          - containerPort: 9090

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allowonly-frontend
+spec:
+  podSelector:
+    matchLabels:
+      tier: backend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+    - from: []
+      # - podSelector:
+      #     matchLabels:
+      #       tier: frontend
+      # ports:
+      #   - protocol: TCP
+      #     port: 9090
+  egress:
+    - to: []

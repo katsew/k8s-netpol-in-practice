@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stub
+  labels:
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+      role: stub
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        role: stub
+    spec:
+      containers:
+      - name: echo-stub
+        image: katsew/kodama:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "10m"
+        env:
+          - name: LAUNCH_HOST
+            value: "0.0.0.0"
+          - name: LAUNCH_PORT
+            value: "8080"
+          - name: BACKEND_HOST
+            value: "backend"
+          - name: BACKEND_PORT
+            value: "9090"
+        command: ["kodama", "http", "client"]
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 3
+          successThreshold: 3
+          failureThreshold: 3

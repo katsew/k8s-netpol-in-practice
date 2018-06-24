@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+  labels:
+    tier: backend
+spec:
+  selector:
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 9090
+    targetPort: 9090

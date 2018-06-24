@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+  labels:
+    tier: frontend
+spec:
+  type: NodePort
+  selector:
+    tier: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
