@@ -22,7 +22,11 @@ spec:
         imagePullPolicy: Always
         resources:
           requests:
-            cpu: "10m"
+            cpu: "30m"
+            memory: "30Mi"
+          limits:
+            cpu: "30m"
+            memory: "30Mi"
         env:
           - name: LAUNCH_HOST
             value: "0.0.0.0"

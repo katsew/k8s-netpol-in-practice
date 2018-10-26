@@ -23,6 +23,10 @@ spec:
         resources:
           requests:
             cpu: "10m"
+            memory: "10Mi"
+          limits:
+            cpu: "50m"
+            memory: "50Mi"
         env:
           - name: LAUNCH_HOST
             value: "0.0.0.0"
